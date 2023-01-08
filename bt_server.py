@@ -44,7 +44,10 @@ while True:
         if os.path.exists("/home/pi/src/" + data.decode("utf-8") + ".sh"):
             os.popen("sh /home/pi/src/" + data.decode("utf-8") + ".sh")
             os.popen("echo " + "sh /home/pi/src/" + data.decode("utf-8") + ".sh" + " >> /home/pi/bt_server.log")
-    client_sock.send(data)
+            client_sock.send("success")
+        else:
+            os.popen("echo couldn't find command for " + data.decode("utf-8") + " >> /home/pi/bt_server.log")
+            client_sock.send("failure")
     if data == "quit":
         break
 
